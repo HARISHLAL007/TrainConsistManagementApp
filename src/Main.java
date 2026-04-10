@@ -4,11 +4,17 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        // Welcome Message (UC1)
         System.out.println("=== Train Consist Management App ===");
 
+        // Initialize Train Consist (UC1)
         List<String> passengerBogies = new ArrayList<>();
+        System.out.println("Train consist initialized.");
+        System.out.println("Initial bogie count: " + passengerBogies.size());
 
-        // Add bogies
+        System.out.println("-----------------------------------");
+
+        // UC2: Add Passenger Bogies
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
