@@ -31,7 +31,6 @@ public class Main {
         System.out.println("-----------------------------------");
 
         Set<String> bogieIds = new HashSet<>();
-
         bogieIds.add("BG101");
         bogieIds.add("BG102");
         bogieIds.add("BG103");
@@ -44,7 +43,6 @@ public class Main {
 
         LinkedList<String> train = new LinkedList<>();
 
-        // Add bogies
         train.add("Engine");
         train.add("Sleeper");
         train.add("AC");
@@ -53,14 +51,25 @@ public class Main {
 
         System.out.println("Initial train: " + train);
 
-        // Insert Pantry Car at position 2
         train.add(2, "Pantry");
-        System.out.println("After adding Pantry at index 2: " + train);
+        System.out.println("After adding Pantry: " + train);
 
-        // Remove first and last
         train.removeFirst();
         train.removeLast();
 
         System.out.println("Final train consist: " + train);
+
+        // ---------------- UC5 ----------------
+        System.out.println("-----------------------------------");
+
+        LinkedHashSet<String> formation = new LinkedHashSet<>();
+
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
+        formation.add("Sleeper"); // duplicate (ignored)
+
+        System.out.println("Final train formation (no duplicates, ordered): " + formation);
     }
 }
