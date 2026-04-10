@@ -1,53 +1,32 @@
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
-
-class GoodsBogie {
-    String type;
-    String cargo;
-
-    GoodsBogie(String type) {
-        this.type = type;
-    }
-
-    void assignCargo(String cargo) {
-        try {
-            // Rule: Rectangular bogie cannot carry Petroleum
-            if (type.equals("Rectangular") && cargo.equals("Petroleum")) {
-                throw new CargoSafetyException("Unsafe cargo assignment: Petroleum not allowed in Rectangular bogie");
-            }
-
-            this.cargo = cargo;
-            System.out.println(type + " bogie assigned with cargo: " + cargo);
-
-        } catch (CargoSafetyException e) {
-            System.out.println("Error: " + e.getMessage());
-
-        } finally {
-            System.out.println("Cargo assignment attempt completed for " + type);
-        }
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("=== UC15: Safe Cargo Assignment ===");
+        System.out.println("=== UC16: Bubble Sort Passenger Capacities ===");
 
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        // Safe assignment
-        b1.assignCargo("Petroleum");
+        System.out.println("Before Sorting:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        // Unsafe assignment
-        b2.assignCargo("Petroleum");
+        // Bubble Sort
+        int n = capacities.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
 
-        // Another safe assignment
-        b2.assignCargo("Coal");
+        System.out.println("\nAfter Sorting:");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
 
-        System.out.println("Program continues safely...");
+        System.out.println("\nProgram continues...");
     }
 }
