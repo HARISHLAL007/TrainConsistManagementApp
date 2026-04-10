@@ -1,51 +1,57 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
-class GoodsBogie {
-    String type;
-    String cargo;
+class Bogie {
+    String name;
+    int capacity;
 
-    GoodsBogie(String type, String cargo) {
-        this.type = type;
-        this.cargo = cargo;
-    }
-
-    @Override
-    public String toString() {
-        return type + " -> " + cargo;
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("=== UC12: Safety Compliance Check ===");
+        System.out.println("=== UC13: Performance Comparison ===");
 
-        List<GoodsBogie> bogies = new ArrayList<>();
+        List<Bogie> bogies = new ArrayList<>();
 
-        bogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
-        bogies.add(new GoodsBogie("Open", "Coal"));
-        bogies.add(new GoodsBogie("Box", "Grain"));
-        bogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
-        // Try invalid case:
-        // bogies.add(new GoodsBogie("Cylindrical", "Coal"));
-
-        System.out.println("Goods Bogies:");
-        for (GoodsBogie b : bogies) {
-            System.out.println(b);
+        // Create large dataset
+        for (int i = 0; i < 100000; i++) {
+            bogies.add(new Bogie("Bogie" + i, i % 100));
         }
 
-        // Safety check using allMatch
-        boolean isSafe = bogies.stream()
-                .allMatch(b -> 
-                    !b.type.equals("Cylindrical") || b.cargo.equals("Petroleum")
-                );
+        // ---------------- LOOP APPROACH ----------------
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : bogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+        // ---------------- STREAM APPROACH ----------------
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+        // ---------------- RESULTS ----------------
+        System.out.println("Loop Result Size: " + loopResult.size());
+        System.out.println("Stream Result Size: " + streamResult.size());
 
         System.out.println("----------------------------");
-
-        if (isSafe) {
-            System.out.println("Train is SAFETY COMPLIANT");
-        } else {
-            System.out.println("Train is NOT SAFE");
-        }
+        System.out.println("Loop Time (ns): " + loopTime);
+        System.out.println("Stream Time (ns): " + streamTime);
     }
 }
