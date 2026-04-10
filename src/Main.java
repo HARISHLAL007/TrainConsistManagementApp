@@ -36,8 +36,8 @@ public class Main {
 
         // Safety check using allMatch
         boolean isSafe = bogies.stream()
-                .allMatch(b ->
-                        !b.type.equals("Cylindrical") || b.cargo.equals("Petroleum")
+                .allMatch(b -> 
+                    !b.type.equals("Cylindrical") || b.cargo.equals("Petroleum")
                 );
 
         System.out.println("----------------------------");
