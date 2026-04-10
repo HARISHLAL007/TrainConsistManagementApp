@@ -1,17 +1,24 @@
-// ---------------- UC6 ----------------
-System.out.println("-----------------------------------");
+import java.util.HashMap;
+import java.util.Map;
 
-HashMap<String, Integer> bogieCapacity = new HashMap<>();
+public class Main {
+    public static void main(String[] args) {
 
-// Adding bogie capacities
-bogieCapacity.put("Sleeper", 72);
-bogieCapacity.put("AC Chair", 60);
-bogieCapacity.put("First Class", 24);
-bogieCapacity.put("Cargo", 100);
+        System.out.println("=== UC6: Map Bogie to Capacity ===");
 
-// Displaying capacity details
-System.out.println("Bogie Capacity Details:");
+        HashMap<String, Integer> bogieCapacity = new HashMap<>();
 
-for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-        System.out.println(entry.getKey() + " -> " + entry.getValue());
+        // Adding bogie capacities
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 60);
+        bogieCapacity.put("First Class", 24);
+        bogieCapacity.put("Cargo", 100);
+
+        // Displaying capacity details
+        System.out.println("Bogie Capacity Details:");
+
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+    }
+}
